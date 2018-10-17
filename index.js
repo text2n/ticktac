@@ -121,7 +121,7 @@ function getNextMove() {
         let win = checkWin(gridCpy);
 
         if (win == 2) {
-            rank[i] = 1;
+            rank[i] = 2;
             continue;
         } else if (win == 3) {            
             continue;
@@ -139,17 +139,18 @@ function getNextMove() {
                 gridCpy[remainingMoves[j][0]][remainingMoves[j][1]] = 0;
                 rank[i] = -1;
                 continue;
-            } else if (typeof rank[i] === 'undefined'){
+            } else if (typeof rank[i] == 0){
                 gridCpy[remainingMoves[j][0]][remainingMoves[j][1]] = 0;
-                rank[i] = 0;
+                rank[i] = 1;
                 continue;
             }
             gridCpy[remainingMoves[j][0]][remainingMoves[j][1]] = 0;
         }
     }
+
     let best = 0;
     for (let i = 0;i < remainingMoves.length;i++) {
-        if (typeof rank[i] !== 'undefined' && rank[best] < rank[i]) {
+        if (rank[best] < rank[i]) {
             best = i;
         }
     }
